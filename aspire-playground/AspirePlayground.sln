@@ -10,6 +10,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspirePlayground.ApiService
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspirePlayground.Web", "AspirePlayground.Web\AspirePlayground.Web.csproj", "{3BE81B38-3370-40BC-BB5F-F260AC54AAA1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspirePlayground.FusionCache", "AspirePlayground.FusionCache\AspirePlayground.FusionCache.csproj", "{36DE4D97-8410-46AA-8359-D63D24D6E3BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{3BE81B38-3370-40BC-BB5F-F260AC54AAA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BE81B38-3370-40BC-BB5F-F260AC54AAA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BE81B38-3370-40BC-BB5F-F260AC54AAA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36DE4D97-8410-46AA-8359-D63D24D6E3BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36DE4D97-8410-46AA-8359-D63D24D6E3BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36DE4D97-8410-46AA-8359-D63D24D6E3BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36DE4D97-8410-46AA-8359-D63D24D6E3BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

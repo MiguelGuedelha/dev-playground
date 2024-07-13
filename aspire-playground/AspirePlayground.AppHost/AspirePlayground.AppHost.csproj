@@ -11,11 +11,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AspirePlayground.ApiService\AspirePlayground.ApiService.csproj" />
+    <ProjectReference Include="..\AspirePlayground.FusionCache\AspirePlayground.FusionCache.csproj" />
     <ProjectReference Include="..\AspirePlayground.Web\AspirePlayground.Web.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.AppHost" Version="8.0.2" />
+    <PackageReference Include="Aspire.Hosting.Redis" Version="8.0.2" />
   </ItemGroup>
 
 </Project>

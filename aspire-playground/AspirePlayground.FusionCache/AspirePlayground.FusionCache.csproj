@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>dotnet-AspirePlayground.ConsoleConsumer-BF065D62-5039-4FFD-A3AF-0F9A1F44C2C1</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" Version="8.0.2" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0"/>
+        <PackageReference Include="Refit.HttpClientFactory" Version="7.1.2" />
+        <PackageReference Include="Refit.Newtonsoft.Json" Version="7.1.2" />
+        <PackageReference Include="ZiggyCreatures.FusionCache" Version="1.2.0" />
+        <PackageReference Include="ZiggyCreatures.FusionCache.Backplane.StackExchangeRedis" Version="1.2.0" />
+        <PackageReference Include="ZiggyCreatures.FusionCache.OpenTelemetry" Version="1.2.0" />
+        <PackageReference Include="ZiggyCreatures.FusionCache.Serialization.NewtonsoftJson" Version="1.2.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\AspirePlayground.ServiceDefaults\AspirePlayground.ServiceDefaults.csproj" />
+    </ItemGroup>
+</Project>
