@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AspirePlayground.ApiService\AspirePlayground.ApiService.csproj" />
     <ProjectReference Include="..\AspirePlayground.FusionCache\AspirePlayground.FusionCache.csproj" />
+    <ProjectReference Include="..\AspirePlayground.Typesense\AspirePlayground.Typesense.csproj" />
     <ProjectReference Include="..\AspirePlayground.Web\AspirePlayground.Web.csproj" />
   </ItemGroup>
 

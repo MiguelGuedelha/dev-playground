@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -8,6 +8,10 @@
 
   <ItemGroup>
     <PackageReference Include="Typesense" Version="7.12.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AspirePlayground.ServiceDefaults\AspirePlayground.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,6 @@
+using System.Text.Json;
 using AspirePlayground.FusionCache;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
 using Refit;
@@ -47,7 +49,9 @@ builder.Services.AddFusionCache()
     .WithSerializer(
         new FusionCacheNewtonsoftJsonSerializer()
     )
-    .WithRegisteredDistributedCache()
+    .WithDistributedCache(
+        new RedisCache(new RedisCacheOptions { Configuration = "redis" })
+    )
     .WithBackplane(
         new RedisBackplane(new RedisBackplaneOptions { Configuration = "redis" })
     );
@@ -73,4 +77,16 @@ builder.Services.AddOpenTelemetry()
 builder.Services.AddRefitClient<IWeatherClient>();
 
 var host = builder.Build();
+
+var client = host.Services.GetRequiredService<IWeatherClient>();
+
+var cache = host.Services.GetRequiredService<IFusionCache>();
+
+var data = cache.GetOrSet("weather", _ => client.GetWeather(CancellationToken.None));
+
+Console.WriteLine(JsonSerializer.Serialize(data, new JsonSerializerOptions
+{
+    WriteIndented = true
+}));
+
 host.Run();
