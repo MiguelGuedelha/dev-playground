@@ -1,4 +1,4 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.0.0
 MinimumVisualStudioVersion = 17.8.0.0
@@ -11,6 +11,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspirePlayground.Web", "AspirePlayground.Web\AspirePlayground.Web.csproj", "{3BE81B38-3370-40BC-BB5F-F260AC54AAA1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspirePlayground.FusionCache", "AspirePlayground.FusionCache\AspirePlayground.FusionCache.csproj", "{36DE4D97-8410-46AA-8359-D63D24D6E3BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspirePlayground.Typesense", "AspirePlayground.Typesense\AspirePlayground.Typesense.csproj", "{C7FDF8D7-4477-4753-AFF7-19002BA3D00D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{36DE4D97-8410-46AA-8359-D63D24D6E3BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36DE4D97-8410-46AA-8359-D63D24D6E3BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36DE4D97-8410-46AA-8359-D63D24D6E3BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7FDF8D7-4477-4753-AFF7-19002BA3D00D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7FDF8D7-4477-4753-AFF7-19002BA3D00D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7FDF8D7-4477-4753-AFF7-19002BA3D00D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7FDF8D7-4477-4753-AFF7-19002BA3D00D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
