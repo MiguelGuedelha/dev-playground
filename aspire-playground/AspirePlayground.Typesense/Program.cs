@@ -11,7 +11,7 @@ builder.Services.AddTypesenseClient(config =>
     config.ApiKey = "xyz";
     config.Nodes = new[]
     {
-        new Node("search-endpoint", "8108")
+        new Node("search-endpoint", "80")
     };
 }, enableHttpCompression: false);
 
@@ -31,21 +31,26 @@ var schema = new Schema(
     },
     "houseNumber");
 
-if (await typesenseClient.RetrieveCollection("Addresses") is { } collection)
+while (true)
 {
-    Console.WriteLine(JsonSerializer.Serialize(collection, new JsonSerializerOptions
+    if (await typesenseClient.RetrieveCollection("Addresses") is { } collection)
     {
-        WriteIndented = true,
-    }));
-}
-else
-{
-    var createCollectionResult = await typesenseClient.CreateCollection(schema);
-
-    Console.WriteLine(JsonSerializer.Serialize(createCollectionResult, new JsonSerializerOptions
+        Console.WriteLine(JsonSerializer.Serialize(collection, new JsonSerializerOptions
+        {
+            WriteIndented = true,
+        }));
+    }
+    else
     {
-        WriteIndented = true,
-    }));
+        var createCollectionResult = await typesenseClient.CreateCollection(schema);
+
+        Console.WriteLine(JsonSerializer.Serialize(createCollectionResult, new JsonSerializerOptions
+        {
+            WriteIndented = true,
+        }));
+    }
+
+    await Task.Delay(5000);
 }
 
-host.Run();
+//host.Run();

@@ -5,5 +5,5 @@ namespace AspirePlayground.FusionCache;
 public interface IWeatherClient
 {
     [Get("/weatherforecast")]
-    object GetWeather(CancellationToken cancellationToken);
+    Task<object> GetWeather(CancellationToken cancellationToken);
 }

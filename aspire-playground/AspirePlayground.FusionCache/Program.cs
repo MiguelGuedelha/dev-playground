@@ -50,10 +50,10 @@ builder.Services.AddFusionCache()
         new FusionCacheNewtonsoftJsonSerializer()
     )
     .WithDistributedCache(
-        new RedisCache(new RedisCacheOptions { Configuration = "redis" })
+        new RedisCache(new RedisCacheOptions { Configuration = "redis,abortConnect=false" })
     )
     .WithBackplane(
-        new RedisBackplane(new RedisBackplaneOptions { Configuration = "redis" })
+        new RedisBackplane(new RedisBackplaneOptions { Configuration = "redis,abortConnect=false" })
     );
 
 builder.Services.AddOpenTelemetry()
@@ -74,7 +74,10 @@ builder.Services.AddOpenTelemetry()
         });
     });
 
-builder.Services.AddRefitClient<IWeatherClient>();
+builder.Services.AddRefitClient<IWeatherClient>().ConfigureHttpClient(c =>
+{
+    c.BaseAddress = new("https+http://apiservice");
+});
 
 var host = builder.Build();
 
@@ -82,11 +85,20 @@ var client = host.Services.GetRequiredService<IWeatherClient>();
 
 var cache = host.Services.GetRequiredService<IFusionCache>();
 
-var data = cache.GetOrSet("weather", _ => client.GetWeather(CancellationToken.None));
-
-Console.WriteLine(JsonSerializer.Serialize(data, new JsonSerializerOptions
+var data = await cache.GetOrSetAsync("weather", async _ => new
 {
-    WriteIndented = true
-}));
+    Data = await client.GetWeather(CancellationToken.None),
+    Generated = DateTime.UtcNow
+});
 
-host.Run();
+while (true)
+{
+    Console.WriteLine(JsonSerializer.Serialize(data, new JsonSerializerOptions
+    {
+        WriteIndented = true
+    }));
+    
+    await Task.Delay(5000);
+}
+
+//host.Run();

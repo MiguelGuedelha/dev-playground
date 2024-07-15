@@ -8,10 +8,10 @@ var redis = builder
     .WithRedisCommander();
 
 var typesense = builder
-    .AddContainer("search", "typesense/typesense:26.0")
-    .WithHttpEndpoint(port: 8108, targetPort: 8108 , name: "search-endpoint")
+    .AddContainer("search", "typesense/typesense", "26.0")
+    .WithHttpEndpoint(port: 8108, targetPort: 8108, name: "search-endpoint")
     .WithBindMount(baseVolumePath + "AspirePlayground-typesense-data", "/data")
-    .WithArgs("--data-dir /data --api-key=xyz --enable-cors");
+    .WithArgs("--data-dir=/data", "--api-key=xyz", " --enable-cors");
 
 var typesenseEndpoint = typesense.GetEndpoint("search-endpoint");
 
