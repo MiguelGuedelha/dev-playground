@@ -1,1 +1,3 @@
-﻿/local/volumes/AspirePlayground-typesense-data/
+﻿/local/volumes/AspirePlayground-typesense-data/*
+
+!.gitkeep
