@@ -7,6 +7,8 @@ var redis = builder
     .AddRedis("cache")
     .WithRedisCommander();
 
+var redisEndpoint = redis.GetEndpoint("http");
+
 var typesense = builder
     .AddContainer("search", "typesense/typesense", "26.0")
     .WithHttpEndpoint(port: 8108, targetPort: 8108, name: "search-endpoint")
@@ -16,17 +18,13 @@ var typesense = builder
 var typesenseEndpoint = typesense.GetEndpoint("search-endpoint");
 
 // Projects
-var apiService = builder.AddProject<Projects.AspirePlayground_ApiService>("apiservice");
+var apiService = builder.AddProject<Projects.AspirePlayground_ApiService>("apiservice")
+        .WithReference(redis)
+        .WithReference(redisEndpoint)
+        .WithReference(typesenseEndpoint);
 
 builder.AddProject<Projects.AspirePlayground_Web>("webfrontend")
     .WithExternalHttpEndpoints()
     .WithReference(apiService);
-
-builder.AddProject<Projects.AspirePlayground_FusionCache>("fusion-cache")
-    .WithReference(apiService)
-    .WithReference(redis);
-
-builder.AddProject<Projects.AspirePlayground_Typesense>("typesense-search")
-    .WithReference(typesenseEndpoint);
 
 builder.Build().Run();

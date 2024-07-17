@@ -7,7 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AspirePlayground.FusionCache\AspirePlayground.FusionCache.csproj" />
     <ProjectReference Include="..\AspirePlayground.ServiceDefaults\AspirePlayground.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\AspirePlayground.Typesense\AspirePlayground.Typesense.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" Version="8.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
 </Project>
