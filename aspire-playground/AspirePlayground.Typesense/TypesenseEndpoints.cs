@@ -29,7 +29,7 @@ public static class TypesenseEndpoints
     
     private static async Task<Address> UpsertAddress(UpsertDocumentRequest<Address> request, ITypesenseService service)
     {
-        return await service.UpsertDocument(request.CollectionName, request.Document);
+        return await service.UpsertDocument("Addresses", request.Document);
     }
 }
 
@@ -37,4 +37,4 @@ record CreateCollectionRequest(string CollectionName, List<CreateCollectionReque
 
 record CreateCollectionRequestFields(string Name, FieldType Type, bool IsFacet, bool IsOptional, bool IsIndexed);
 
-record UpsertDocumentRequest<T>(string CollectionName, T Document);
+record UpsertDocumentRequest<T>(T Document);

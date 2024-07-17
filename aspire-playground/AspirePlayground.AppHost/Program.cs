@@ -4,24 +4,24 @@ const string baseVolumePath = "local/volumes/";
 
 // Containers
 var redis = builder
-    .AddRedis("cache")
+    .AddRedis("Cache")
     .WithRedisCommander();
 
 var redisEndpoint = redis.GetEndpoint("http");
 
 var typesense = builder
     .AddContainer("search", "typesense/typesense", "26.0")
-    .WithHttpEndpoint(port: 8108, targetPort: 8108, name: "search-endpoint")
+    .WithHttpEndpoint(port: 8108, targetPort: 8108)
     .WithBindMount(baseVolumePath + "AspirePlayground-typesense-data", "/data")
     .WithArgs("--data-dir=/data", "--api-key=xyz", " --enable-cors");
 
-var typesenseEndpoint = typesense.GetEndpoint("search-endpoint");
+var typesenseEndpoint = typesense.GetEndpoint("http");
 
 // Projects
 var apiService = builder.AddProject<Projects.AspirePlayground_ApiService>("apiservice")
         .WithReference(redis)
         .WithReference(redisEndpoint)
-        .WithReference(typesenseEndpoint);
+        .WithEnvironment("ConnectionStrings__Search", typesenseEndpoint);
 
 builder.AddProject<Projects.AspirePlayground_Web>("webfrontend")
     .WithExternalHttpEndpoints()

@@ -8,7 +8,7 @@ builder.AddServiceDefaults();
 
 // Add services to the container.
 builder.Services.AddProblemDetails();
-builder.AddRedisDistributedCache("cache");
+builder.AddRedisDistributedCache("Cache");
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -17,7 +17,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddFusionCacheProjectServices();
 builder.Services.AddFusionCacheOpenTelemetry();
 
-builder.Services.AddTypesenseProjectServices();
+builder.Services.AddTypesenseProjectServices(builder.Configuration);
 
 var app = builder.Build();
 
