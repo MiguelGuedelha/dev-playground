@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App"/>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Typesense" Version="7.12.0" />
+    <PackageReference Include="Typesense" Version="7.12.0"/>
   </ItemGroup>
 
 </Project>

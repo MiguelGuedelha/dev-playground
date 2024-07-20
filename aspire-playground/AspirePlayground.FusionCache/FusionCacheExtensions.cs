@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Connections;
-using Microsoft.Extensions.Caching.StackExchangeRedis;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
@@ -20,7 +18,7 @@ public static class FusionCacheExtensions
             {
                 //Backs off the Distributed Cache if having issues
                 o.DistributedCacheCircuitBreakerDuration = TimeSpan.FromSeconds(2);
-                
+
                 //Log Levels (examples)
                 o.DistributedCacheErrorsLogLevel = LogLevel.Error;
                 o.FactoryErrorsLogLevel = LogLevel.Error;
@@ -29,21 +27,21 @@ public static class FusionCacheExtensions
             {
                 //General
                 o.Duration = TimeSpan.FromSeconds(15);
-        
+
                 //Failsafe
                 o.IsFailSafeEnabled = true;
                 o.FailSafeMaxDuration = TimeSpan.FromMinutes(1);
                 o.FailSafeThrottleDuration = TimeSpan.FromSeconds(5);
-        
+
                 //Factory Timeouts
                 o.FactorySoftTimeout = TimeSpan.FromSeconds(1);
                 o.FactoryHardTimeout = TimeSpan.FromSeconds(2);
-                
+
                 //Distributed Cache Options
                 o.DistributedCacheSoftTimeout = TimeSpan.FromSeconds(1);
                 o.DistributedCacheHardTimeout = TimeSpan.FromSeconds(2);
                 o.AllowBackgroundDistributedCacheOperations = true;
-                
+
                 //Jitter
                 o.JitterMaxDuration = TimeSpan.FromSeconds(2);
             })
@@ -51,11 +49,12 @@ public static class FusionCacheExtensions
                 new FusionCacheNewtonsoftJsonSerializer()
             )
             .WithRegisteredDistributedCache()
-            .WithBackplane(sp => 
+            .WithBackplane(sp =>
             {
                 return new RedisBackplane(new RedisBackplaneOptions
                 {
-                    ConnectionMultiplexerFactory = () => Task.FromResult(sp.GetRequiredService<IConnectionMultiplexer>())
+                    ConnectionMultiplexerFactory = () =>
+                        Task.FromResult(sp.GetRequiredService<IConnectionMultiplexer>())
                 });
             });
     }

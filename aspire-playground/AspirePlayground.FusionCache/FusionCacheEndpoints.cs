@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using ZiggyCreatures.Caching.Fusion;
 
 namespace AspirePlayground.FusionCache;
@@ -22,18 +20,18 @@ public static class FusionCacheEndpoints
         {
             var failureRandom = Random.Shared.Next(1, 11);
             var factoryDelayRandom = Random.Shared.Next(500, 2001);
-            
+
             Console.WriteLine($"{nameof(GenerateRandomCacheData)} | {new { factoryDelayRandom, failureRandom }}");
-            
+
             if (failureRandom > 5)
             {
                 // 50% chance of factory failing
                 throw new InvalidOperationException();
             }
-            
-            
+
+
             await Task.Delay(factoryDelayRandom, t);
-            
+
             return Enumerable.Range(0, seed).Select(_ => random.Next()).ToList();
         });
     }

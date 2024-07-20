@@ -10,14 +10,14 @@ public class TypesenseService : ITypesenseService
     {
         //Assert
         ArgumentNullException.ThrowIfNull(client);
-        
+
         //Assign
         _client = client;
     }
 
-    public async Task<CollectionResponse> CreateSchema(string collectionName, List<Field> fields, string? sortingFieldName)
+    public async Task<CollectionResponse> CreateSchema(string collectionName, List<Field> fields,
+        string? sortingFieldName)
     {
-
         return sortingFieldName switch
         {
             not null => await _client.CreateCollection(new(collectionName, fields, sortingFieldName)),
@@ -25,7 +25,8 @@ public class TypesenseService : ITypesenseService
         };
     }
 
-    public async Task<UpdateCollectionResponse> UpdateSchema(string collectionName, List<UpdateSchemaField> fieldsToUpdate)
+    public async Task<UpdateCollectionResponse> UpdateSchema(string collectionName,
+        List<UpdateSchemaField> fieldsToUpdate)
     {
         throw new NotImplementedException();
     }

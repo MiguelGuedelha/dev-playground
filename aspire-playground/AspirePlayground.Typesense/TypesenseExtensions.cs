@@ -9,7 +9,7 @@ public static class TypesenseExtensions
     public static void AddTypesenseProjectServices(this IServiceCollection services, IConfiguration configuration)
     {
         var url = new Uri(configuration.GetConnectionString("Search")!);
-        
+
         services.AddTypesenseClient(config =>
         {
             config.ApiKey = "xyz";
@@ -17,7 +17,7 @@ public static class TypesenseExtensions
             {
                 new Node(url.Host, url.Port.ToString())
             };
-        }, enableHttpCompression: false);
+        }, false);
 
         services.AddScoped<ITypesenseService, TypesenseService>();
     }

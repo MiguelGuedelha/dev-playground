@@ -13,28 +13,37 @@ public static class TypesenseEndpoints
         //Collections
         var collectionGroup = group.MapGroup("collections");
         collectionGroup.MapPost("", CreateCollection);
-        
+
         //Documents
         var documentsGroup = group.MapGroup("documents");
         documentsGroup.MapPost("addresses", UpsertAddress);
     }
 
-    private static async Task<CollectionResponse> CreateCollection(CreateCollectionRequest request, ITypesenseService service)
+    private static async Task<CollectionResponse> CreateCollection(CreateCollectionRequest request,
+        ITypesenseService service)
     {
         return await service.CreateSchema(
-            request.CollectionName, 
+            request.CollectionName,
             request.Fields.Select(x => new Field(x.Name, x.Type, x.IsFacet, x.IsOptional, x.IsIndexed)).ToList(),
             request.SortingField);
     }
-    
+
     private static async Task<Address> UpsertAddress(UpsertDocumentRequest<Address> request, ITypesenseService service)
     {
         return await service.UpsertDocument("Addresses", request.Document);
     }
 }
 
-record CreateCollectionRequest(string CollectionName, List<CreateCollectionRequestFields> Fields, string? SortingField);
+internal record CreateCollectionRequest(
+    string CollectionName,
+    List<CreateCollectionRequestFields> Fields,
+    string? SortingField);
 
-record CreateCollectionRequestFields(string Name, FieldType Type, bool IsFacet, bool IsOptional, bool IsIndexed);
+internal record CreateCollectionRequestFields(
+    string Name,
+    FieldType Type,
+    bool IsFacet,
+    bool IsOptional,
+    bool IsIndexed);
 
-record UpsertDocumentRequest<T>(T Document);
+internal record UpsertDocumentRequest<T>(T Document);
